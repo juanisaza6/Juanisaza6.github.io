@@ -163,8 +163,14 @@
     }
     .contact-row:last-child { border-bottom: none; }
     .contact-row:hover { color: var(--ink); }
-    .contact-row:hover .cr-arrow { transform: translate(3px, -3px); }
-    .contact-row:hover .cr-value { border-color: var(--ink); }
+    .contact-row:hover
+    .contact-row:hover     .cr-value { position: relative; padding-bottom: 1px; }
+    .cr-value::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 0; width: 0; height: 1px;
+      background: var(--ink); transition: width .3s var(--ease);
+    }
+    .contact-row:hover .cr-value::after { width: 100%; }
     .contact-row-plain {
       display: flex; align-items: center; gap: 14px;
       padding: 16px 0;
@@ -177,11 +183,13 @@
       font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--stone); width: 64px; flex-shrink: 0;
     }
-    .cr-value {
-      border-bottom: 1px solid var(--mid); padding-bottom: 1px;
-      transition: border-color .2s;
+        .cr-value { position: relative; padding-bottom: 1px; }
+    .cr-value::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 0; width: 0; height: 1px;
+      background: var(--ink); transition: width .3s var(--ease);
     }
-    .cr-arrow { font-size: 12px; margin-left: auto; transition: transform .25s var(--ease); }
+    .contact-row:hover .cr-value::after { width: 100%; }
 
     /* RIGHT */
     .contact-right {
@@ -261,6 +269,11 @@
       .contact-left { padding: 36px 16px 32px; }
       .contact-right { padding: 32px 16px 48px; }
     }
+
+    @media (max-width: 768px) {
+      .cursor, .cursor-ring { display: none !important; }
+      body { cursor: auto; }
+    }
   </style>
 </head>
 <body>
@@ -299,7 +312,6 @@
       <a href="mailto:juanisaza.6@gmail.com" class="contact-row reveal">
         <span class="cr-label">Email</span>
         <span class="cr-value">juanisaza.6@gmail.com</span>
-        <span class="cr-arrow">↗</span>
       </a>
 
       <div class="contact-row-plain reveal">
@@ -310,7 +322,6 @@
       <a href="https://linkedin.com/in/juanisazau" class="contact-row reveal" target="_blank" rel="noopener">
         <span class="cr-label">LinkedIn</span>
         <span class="cr-value">linkedin.com/in/juanisazau</span>
-        <span class="cr-arrow">↗</span>
       </a>
 
     </div>
@@ -371,16 +382,12 @@
         nav.classList.toggle('scrolled', window.scrollY > 40);
       });
 
-            const obs = new IntersectionObserver(function (entries) {
+                  const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
       }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll('.reveal').forEach(function (el) {
-        obs.observe(el);
-      });
-
+      document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
     }); // end DOMContentLoaded
   </script>
 </body>
