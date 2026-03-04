@@ -294,9 +294,9 @@
 
       <p class="contact-tagline reveal">Let's <strong>connect.</strong></p>
 
-      <a href="/cdn-cgi/l/email-protection#2e445b4f40475d4f544f00186e49434f4742004d4143" class="contact-row reveal">
+      <a href="mailto:juanisaza.6@gmail.com" class="contact-row reveal">
         <span class="cr-label">Email</span>
-        <span class="cr-value"><span class="__cf_email__" data-cfemail="076d7266696e74667d66293147606a666e6b2964686a">[email&#160;protected]</span></span>
+        <span class="cr-value">juanisaza.6@gmail.com</span>
         <span class="cr-arrow">↗</span>
       </a>
 
@@ -344,7 +344,7 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
       const cursor = document.getElementById('cursor');
       const ring   = document.getElementById('cursorRing');
@@ -359,4 +359,15 @@
         (function tick() {
           rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
           ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-          requestAni
+          requestAnimationFrame(tick);
+        })();
+      }
+
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', function () {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+      });
+  </script>
+
+</body>
+</html>
