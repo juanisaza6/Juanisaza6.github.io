@@ -78,12 +78,6 @@
       color: var(--ink);
     }
     .nav-logo-text strong { font-weight: 600; }
-    .nav-logo-text {
-      font-family: var(--display);
-      font-size: 13px; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--ink);
-    }
-    .nav-logo-text strong { font-weight: 600; }
     .nav-links { display: flex; gap: 40px; list-style: none; }
     .nav-links a {
       font-family: var(--body);
@@ -250,16 +244,22 @@
     .reveal.visible { opacity:1; transform:translateY(0); }
 
     /* RESPONSIVE */
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       nav { padding: 0 24px; }
       .nav-links { gap: 20px; }
       .page-header { padding: calc(var(--nav-h) + 36px) 24px 40px; }
-      .contact-left { padding: 48px 24px; }
-      .contact-right { padding: 48px 24px; }
+      .contact-body { grid-template-columns: 1fr; min-height: unset; }
+      .contact-left { padding: 48px 24px 40px; border-right: none; border-bottom: 1px solid var(--mid); }
+      .contact-right { padding: 40px 24px 60px; }
     }
-    @media (max-width: 600px) {
-      .page-title { font-size: 30px; }
-      .nav-links { gap: 14px; }
+    @media (max-width: 480px) {
+      nav { padding: 0 16px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; }
+      .page-title { font-size: 28px; }
+      .page-header { padding: calc(var(--nav-h) + 24px) 16px 32px; }
+      .contact-left { padding: 36px 16px 32px; }
+      .contact-right { padding: 32px 16px 48px; }
     }
   </style>
 </head>
@@ -375,13 +375,10 @@
         entries.forEach(function (e) {
           if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll('.reveal').forEach(function (el) {
-        obs.observe(el);
-      });
-
-    }); // end DOMContentLoaded
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+    });
   </script>
+
 </body>
 </html>
