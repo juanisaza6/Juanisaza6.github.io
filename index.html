@@ -201,7 +201,7 @@
       opacity: 0; animation: fadeIn 1s var(--ease) .6s forwards;
     }
     .featured-img {
-      width: 100%; aspect-ratio: unset;
+      width: 100%; aspect-ratio: 5/4;
       background: var(--white);
       border: 1px solid var(--mid);
       overflow: hidden; position: relative;
@@ -277,17 +277,17 @@
       font-size: 10px; letter-spacing: 0.18em; color: var(--stone);
     }
     .wc-thumb {
-      width:100%;
+      width:100%; aspect-ratio: 5/4;
       background: var(--off); border: 1px solid var(--mid);
       position:relative; overflow:hidden;
     }
     .wc-thumb img {
-      width: 100%; height: auto;
+      width: 100%; height: 100%;
       display: block;
-      object-fit: contain;
+      object-fit: cover;
       transition: transform .6s var(--ease);
     }
-    .work-card:hover .wc-thumb img { transform: scale(1.02); }
+    .work-card:hover .wc-thumb img { transform: scale(1.04); }
     .wc-line {
       position:absolute; bottom:0; left:0;
       height:2px; background:var(--accent);
@@ -540,7 +540,7 @@
           <line x1="80" y1="200" x2="320" y2="200" stroke="#B1C5D3" stroke-width="0.5"/>
           <circle cx="580" cy="280" r="60" fill="none" stroke="#242528" stroke-width="0.8"/>
         </svg>
-        <img id="heroThumbImg" src="images/01_Brooklyn Townhouse/1_Brooklyn_Townhouse_Kitchen.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;background:var(--off);transition:opacity .5s ease;" />
+        <img id="heroThumbImg" src="images/01_Brooklyn Townhouse/1_Brooklyn_Townhouse_Kitchen.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;" />
         <div class="featured-img-overlay"></div>
       </div>
       <div class="featured-caption">
