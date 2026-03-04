@@ -201,7 +201,7 @@
       opacity: 0; animation: fadeIn 1s var(--ease) .6s forwards;
     }
     .featured-img {
-      width: 100%; aspect-ratio: 4/3;
+      width: 100%; aspect-ratio: unset;
       background: var(--white);
       border: 1px solid var(--mid);
       overflow: hidden; position: relative;
@@ -277,10 +277,17 @@
       font-size: 10px; letter-spacing: 0.18em; color: var(--stone);
     }
     .wc-thumb {
-      width:100%; aspect-ratio: 3/2;
+      width:100%;
       background: var(--off); border: 1px solid var(--mid);
       position:relative; overflow:hidden;
     }
+    .wc-thumb img {
+      width: 100%; height: auto;
+      display: block;
+      object-fit: contain;
+      transition: transform .6s var(--ease);
+    }
+    .work-card:hover .wc-thumb img { transform: scale(1.02); }
     .wc-line {
       position:absolute; bottom:0; left:0;
       height:2px; background:var(--accent);
@@ -533,7 +540,7 @@
           <line x1="80" y1="200" x2="320" y2="200" stroke="#B1C5D3" stroke-width="0.5"/>
           <circle cx="580" cy="280" r="60" fill="none" stroke="#242528" stroke-width="0.8"/>
         </svg>
-        <img id="heroThumbImg" src="images/01_Brooklyn Townhouse/1_Brooklyn_Townhouse_Kitchen.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;" />
+        <img id="heroThumbImg" src="images/01_Brooklyn Townhouse/1_Brooklyn_Townhouse_Kitchen.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;background:var(--off);transition:opacity .5s ease;" />
         <div class="featured-img-overlay"></div>
       </div>
       <div class="featured-caption">
@@ -638,9 +645,9 @@
       <p class="footer-sub">I am currently open to opportunities in architecture and design firms in New York and Medellín. Feel free to reach out.</p>
     </div>
     <div class="footer-right">
-      <a href="mailto:juanisaza.6@gmail.com" class="footer-contact-item">
+      <a href="/cdn-cgi/l/email-protection#dcb6a9bdb2b5afbda6bdf2ea9cbbb1bdb5b0f2bfb3b1" class="footer-contact-item">
         <span class="fc-label">Email</span>
-        <span class="fc-value">juanisaza.6@gmail.com</span>
+        <span class="fc-value"><span class="__cf_email__" data-cfemail="c4aeb1a5aaadb7a5bea5eaf284a3a9a5ada8eaa7aba9">[email&#160;protected]</span></span>
         <span class="fc-arrow">↗</span>
       </a>
       <div class="footer-loc">
@@ -659,7 +666,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     document.addEventListener('DOMContentLoaded', function () {
 
       // ─── Featured project randomizer
