@@ -413,7 +413,7 @@
 
       .lightbox-nav.lb-prev { left: -10px; }
       .lightbox-nav.lb-next { right: -10px; }
-      footer { grid-template-columns: 1fr; gap: 36px; padding: 48px 24px; }
+      footer { gap: 24px; padding: 48px 24px; }
       .footer-left, .footer-tagline, .footer-sub { text-align: left; }
     }
     @media (max-width: 480px) {
@@ -449,7 +449,7 @@
 
   <nav id="nav">
     <a href="index.html" class="nav-logo">
-      <span class="nav-logo-text">Juan <strong>Isaza</strong></span>
+      <span class="nav-logo-text">Juan <strong>Isaza</strong> Architect</span>
     </a>
     <ul class="nav-links">
       <li><a href="projects.html" class="active">Projects</a></li>
@@ -929,6 +929,7 @@
     </div>
   </footer>
 
+
   <script>
   document.addEventListener('DOMContentLoaded', function () {
 
@@ -937,32 +938,26 @@
     const ring   = document.getElementById('cursorRing');
     if (cursor && ring) {
       let mx = window.innerWidth/2, my = window.innerHeight/2, rx = mx, ry = my;
-      document.addEventListener('mousemove', function(e) {
+      document.addEventListener('mousemove', function (e) {
         mx = e.clientX; my = e.clientY;
-        cursor.style.left = mx+'px'; cursor.style.top = my+'px';
+        cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
         cursor.style.opacity = '1'; ring.style.opacity = '1';
       });
-      (function tick(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
-        ring.style.left=rx+'px'; ring.style.top=ry+'px';
-        requestAnimationFrame(tick); })();
+      (function tick() {
+        rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+        requestAnimationFrame(tick);
+      })();
     }
 
     // ── NAV SCROLL ──────────────────────────────────────────────
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
       nav.classList.toggle('scrolled', window.scrollY > 40);
     });
 
-    // ── SCROLL REVEAL ───────────────────────────────────────────
-    const obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
-
     // ── SLIDESHOWS ──────────────────────────────────────────────
-    document.querySelectorAll('.project-row').forEach(function(row) {
+    document.querySelectorAll('.project-row').forEach(function (row) {
       var ss      = row.querySelector('.slideshow');
       var slides  = ss.querySelectorAll('.slide');
       var thumbs  = row.querySelectorAll('.thumb');
@@ -972,9 +967,8 @@
       var total   = slides.length;
       var current = 0;
 
-      // Parse caption data from data-slides attribute
       var slideData = [];
-      try { slideData = JSON.parse(ss.dataset.slides || '[]'); } catch(e) {}
+      try { slideData = JSON.parse(ss.dataset.slides.replace(/&#39;/g, "'") || '[]'); } catch(e) {}
 
       function goTo(n) {
         slides[current].classList.remove('active');
@@ -982,26 +976,17 @@
         current = (n + total) % total;
         slides[current].classList.add('active');
         thumbs[current] && thumbs[current].classList.add('active');
-        if (counter) counter.textContent = (current+1) + ' / ' + total;
-        // scroll thumb into view
+        if (counter) counter.textContent = (current + 1) + ' / ' + total;
         if (thumbs[current]) {
-          thumbs[current].scrollIntoView({ behavior:'smooth', block:'nearest', inline:'nearest' });
+          thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
         }
       }
 
-      prev && prev.addEventListener('click', function(e) { e.stopPropagation(); goTo(current-1); });
-      next && next.addEventListener('click', function(e) { e.stopPropagation(); goTo(current+1); });
-
-      thumbs.forEach(function(th, i) {
-        th.addEventListener('click', function() { goTo(i); });
-      });
-
-      // Click slide to open lightbox
-      slides.forEach(function(slide, i) {
-        slide.addEventListener('click', function() {
-          var data = slideData[i] || {};
-          openLightbox(slideData, i);
-        });
+      prev && prev.addEventListener('click', function (e) { e.stopPropagation(); goTo(current - 1); });
+      next && next.addEventListener('click', function (e) { e.stopPropagation(); goTo(current + 1); });
+      thumbs.forEach(function (th, i) { th.addEventListener('click', function () { goTo(i); }); });
+      slides.forEach(function (slide, i) {
+        slide.addEventListener('click', function () { openLightbox(slideData, i); });
       });
     });
 
@@ -1031,10 +1016,6 @@
 
     function showLbSlide(i) {
       var d = lbData[i] || {};
-      // Remove any old placeholder
-      var ph = lb.querySelector('.lb-placeholder');
-      if (ph) ph.remove();
-      // Show image
       lbImg.src = d.src || '';
       lbImg.style.display = 'block';
       lbCaption.textContent = d.caption || '';
@@ -1044,20 +1025,26 @@
 
     lbClose.addEventListener('click', closeLightbox);
     lbBackdrop.addEventListener('click', closeLightbox);
-    lbPrev.addEventListener('click', function() {
-      lbIndex = (lbIndex - 1 + lbData.length) % lbData.length;
-      showLbSlide(lbIndex);
+    lbPrev.addEventListener('click', function () {
+      lbIndex = (lbIndex - 1 + lbData.length) % lbData.length; showLbSlide(lbIndex);
     });
-    lbNext.addEventListener('click', function() {
-      lbIndex = (lbIndex + 1) % lbData.length;
-      showLbSlide(lbIndex);
+    lbNext.addEventListener('click', function () {
+      lbIndex = (lbIndex + 1) % lbData.length; showLbSlide(lbIndex);
     });
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
       if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Escape')     closeLightbox();
       if (e.key === 'ArrowLeft')  { lbIndex = (lbIndex - 1 + lbData.length) % lbData.length; showLbSlide(lbIndex); }
       if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbData.length; showLbSlide(lbIndex); }
     });
+
+    // ── SCROLL REVEAL ───────────────────────────────────────────
+    var obsReveal = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obsReveal.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { obsReveal.observe(el); });
 
   }); // end DOMContentLoaded
   </script>
