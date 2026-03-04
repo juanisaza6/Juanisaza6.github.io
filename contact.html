@@ -239,6 +239,8 @@
       margin-top: auto;
     }
 
+
+
     /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity:0; transform:translateY(16px); }
@@ -268,7 +270,7 @@
 
   <nav id="nav">
     <a href="index.html" class="nav-logo">
-      <span class="nav-logo-text">Juan <strong>Isaza</strong></span>
+      <span class="nav-logo-text">Juan <strong>Isaza</strong> Architect</span>
     </a>
     <ul class="nav-links">
       <li><a href="projects.html">Projects</a></li>
@@ -344,6 +346,7 @@
     </div>
   </div>
 
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const cursor = document.getElementById('cursor');
@@ -369,8 +372,6 @@
       });
 
       const obs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-                const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
