@@ -552,43 +552,43 @@
   <section class="section-work">
     <div class="section-header reveal">
       <h2 class="section-title">Selected Work</h2>
-      <span class="section-count">9 projects</span>
+      <span class="section-count">11 projects</span>
     </div>
     <div class="work-grid">
       <a href="projects.html" class="work-card reveal">
         <span class="wc-num">01</span>
         <div class="wc-thumb"><div class="wc-line"></div></div>
-        <div><p class="wc-type">Luxury Residential</p><h3 class="wc-name">Brooklyn Townhouse</h3><p class="wc-loc">New York, NY — Interior Renovation</p></div>
+        <div><p class="wc-type">Retail</p><h3 class="wc-name">Isabel Marant East Hampton</h3><p class="wc-loc">66 Newtown Lane, NY — 1,845 SF</p></div>
         <span class="wc-arrow">↗</span>
       </a>
       <a href="projects.html" class="work-card reveal">
         <span class="wc-num">02</span>
         <div class="wc-thumb"><div class="wc-line"></div></div>
-        <div><p class="wc-type">Hospitality</p><h3 class="wc-name">Piccola Cucina</h3><p class="wc-loc">New York, NY — Food &amp; Beverage Renovation</p></div>
+        <div><p class="wc-type">Retail</p><h3 class="wc-name">Rouje Paris SoHo</h3><p class="wc-loc">476 Broome St, NY — 3,984 SF</p></div>
         <span class="wc-arrow">↗</span>
       </a>
       <a href="projects.html" class="work-card reveal">
         <span class="wc-num">03</span>
         <div class="wc-thumb"><div class="wc-line"></div></div>
-        <div><p class="wc-type">Hospitality</p><h3 class="wc-name">Bagel Market</h3><p class="wc-loc">New York, NY — Food &amp; Beverage Renovation</p></div>
+        <div><p class="wc-type">Institutional Planning</p><h3 class="wc-name">CUNY Capital Plan</h3><p class="wc-loc">New York, NY</p></div>
         <span class="wc-arrow">↗</span>
       </a>
       <a href="projects.html" class="work-card reveal">
         <span class="wc-num">04</span>
         <div class="wc-thumb"><div class="wc-line"></div></div>
-        <div><p class="wc-type">Luxury Retail</p><h3 class="wc-name">Rouje Paris</h3><p class="wc-loc">New York, NY — Flagship Retail Renovation</p></div>
+        <div><p class="wc-type">Academic</p><h3 class="wc-name">Gwangju Main Library</h3><p class="wc-loc">Gwangju, South Korea</p></div>
         <span class="wc-arrow">↗</span>
       </a>
       <a href="projects.html" class="work-card reveal">
         <span class="wc-num">05</span>
         <div class="wc-thumb"><div class="wc-line"></div></div>
-        <div><p class="wc-type">Luxury Retail</p><h3 class="wc-name">Isabel Marant</h3><p class="wc-loc">East Hampton, NY — Boutique Retail Renovation</p></div>
+        <div><p class="wc-type">Residential</p><h3 class="wc-name">Bronx Single Family Addition</h3><p class="wc-loc">Bronx, New York</p></div>
         <span class="wc-arrow">↗</span>
       </a>
       <a href="projects.html" class="work-card reveal">
-        <span class="wc-num">09</span>
+        <span class="wc-num">06</span>
         <div class="wc-thumb"><div class="wc-line"></div></div>
-        <div><p class="wc-type">Theoretical</p><h3 class="wc-name">Personal Practice</h3><p class="wc-loc">New York, NY — Conceptual Design Work</p></div>
+        <div><p class="wc-type">Academic</p><h3 class="wc-name">Urban Constellation</h3><p class="wc-loc">Mixed-use civic intervention</p></div>
         <span class="wc-arrow">↗</span>
       </a>
     </div>
@@ -662,13 +662,14 @@
 
       // ─── Featured project randomizer
       const projects = [
-        { title: 'Brooklyn Townhouse',        type: 'Luxury Residential', loc: 'New York, NY',     year: '2023' },
-        { title: 'Piccola Cucina',            type: 'Hospitality',        loc: 'New York, NY',     year: '2022' },
-        { title: 'Bagel Market',              type: 'Hospitality',        loc: 'New York, NY',     year: '2022' },
-        { title: 'Rouje Paris',               type: 'Luxury Retail',      loc: 'SoHo, New York',   year: '2023' },
-        { title: 'Isabel Marant',             type: 'Luxury Retail',      loc: 'East Hampton, NY', year: '2023' },
-        { title: 'Landmarked Single Family',  type: 'Residential',        loc: 'New York, NY',     year: '2022' },
-        { title: 'Personal Practice',         type: 'Theoretical',        loc: 'New York, NY',     year: '2022' },
+        { title: 'Gwangju Main Library',           type: 'Academic',      loc: 'Gwangju, South Korea', year: '2024' },
+        { title: 'Isabel Marant East Hampton',      type: 'Retail',        loc: '66 Newtown Lane, NY',  year: '2023' },
+        { title: 'Rouje Paris SoHo',                type: 'Retail',        loc: '476 Broome St, NY',    year: '2023' },
+        { title: 'CUNY Capital Plan',               type: 'Institutional', loc: 'New York, NY',         year: '2024' },
+        { title: 'Unearthing Vienna',               type: 'Research',      loc: 'Vienna, Austria',      year: '2022' },
+        { title: 'Urban Constellation',             type: 'Academic',      loc: 'Civic intervention',   year: '2023' },
+        { title: 'Forward to a Collective Living',  type: 'Academic',      loc: 'Housing research',     year: '2022' },
+        { title: "Jefferson's Corner",              type: 'Academic',      loc: 'Jefferson, NY',        year: '2021' },
       ];
       const p = projects[Math.floor(Math.random() * projects.length)];
       document.getElementById('feat-title').textContent = p.title;
@@ -717,13 +718,11 @@
           }
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll('.reveal').forEach(function (el, i) {
-        el.style.transitionDelay = (i % 3) * 0.07 + 's';
+      document.querySelectorAll('.reveal').forEach(function (el) {
         obs.observe(el);
       });
-
-    }); // end DOMContentLoaded
+    });
   </script>
+
 </body>
 </html>
