@@ -98,7 +98,7 @@
       padding-top: var(--nav-h);
       padding: calc(var(--nav-h) + 56px) 48px 48px;
       border-bottom: 1px solid var(--mid);
-      display: flex; align-items: flex-end; justify-content: space-between;
+      display: flex; align-items: flex-end; justify-content: flex-start; gap: 32px;
     }
     .page-header-left {}
     .page-eyebrow {
@@ -129,25 +129,25 @@
 
     .project-row {
       display: grid;
-      grid-template-columns: 36% 64%;
+      grid-template-columns: 1fr;
       border-bottom: 1px solid var(--mid);
-      min-height: 480px;
-      padding-bottom: 64px;
     }
-    .project-row + .project-row {
-      padding-top: 64px;
-    }
-    .project-row:nth-child(even) { grid-template-columns: 64% 36%; }
-    .project-row:nth-child(even) .project-info { order: 2; border-left: 1px solid var(--mid); border-right: none; }
-    .project-row:nth-child(even) .project-gallery { order: 1; }
 
-    /* INFO PANEL */
-    .project-info {
-      padding: 48px 40px;
-      border-right: 1px solid var(--mid);
-      display: flex; flex-direction: column; gap: 32px;
+    /* PROJECT HEADER: title + subtitle spanning full width above gallery */
+    .project-header {
+      padding: 48px 48px 28px;
+      border-bottom: 1px solid var(--mid);
+      display: flex; align-items: baseline; gap: 20px;
     }
-    .project-info-top {}
+
+    /* INFO PANEL: below gallery, 2-col grid */
+    .project-info {
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      border-top: 1px solid var(--mid);
+    }
     .project-number {
       font-family: var(--body);
       font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -395,16 +395,28 @@
     .reveal.visible { opacity:1; transform:translateY(0); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       nav { padding: 0 24px; }
       .nav-links { gap: 20px; }
-      .page-header { padding: calc(var(--nav-h) + 36px) 24px 36px; flex-direction: column; align-items: flex-start; gap: 12px; }
-      .project-info { padding: 28px 20px; font-size: 11px; }
-      .project-gallery { min-height: 200px; }
+      .page-header { padding: calc(var(--nav-h) + 36px) 24px 36px; gap: 16px; }
+      .project-header { padding: 32px 24px 20px; flex-direction: column; gap: 4px; }
+      .project-info { padding: 28px 24px; grid-template-columns: 1fr; gap: 24px; }
+      .project-gallery { min-height: 260px; }
+      footer { gap: 24px; padding: 48px 24px; grid-template-columns: 1fr; }
+      .footer-left, .footer-tagline, .footer-sub { text-align: left; }
       .lightbox-nav.lb-prev { left: -10px; }
       .lightbox-nav.lb-next { right: -10px; }
-      footer { gap: 24px; padding: 48px 24px; }
-      .footer-left, .footer-tagline, .footer-sub { text-align: left; }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 0 16px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; }
+      .page-header { padding: calc(var(--nav-h) + 24px) 16px 24px; }
+      .project-header { padding: 24px 16px 16px; }
+      .project-info { padding: 20px 16px; }
+      .project-gallery { min-height: 220px; }
+      .project-name { font-size: 20px; }
+      .project-desc { font-size: 12px; }
     }
   </style>
 </head>
@@ -452,19 +464,9 @@
 
     <!-- 1 -->
     <div class="project-row reveal" data-project="0">
-      <div class="project-info">
-        <div class="project-info-top">
-          <h2 class="project-name">Brooklyn<br>Townhouse</h2>
-          <p class="project-subtitle">Interior Renovation</p>
-        </div>
-        <table class="project-meta">
-          <tr><td>Sector</td><td>Luxury Residential</td></tr>
-          <tr><td>Location</td><td>New York, NY</td></tr>
-          <tr><td>Year</td><td>2023</td></tr>
-          <tr><td>Team</td><td>DYO Design Office</td></tr>
-          <tr><td>Scope</td><td>Interior Renovation<br>Construction Documentation<br>Custom Fabrication</td></tr>
-        </table>
-        <p class="project-desc">Full-scope residential renovation of a private residence in New York City, encompassing design development, construction documentation, and site coordination. The scope focused on the main floor and entrance, while the garden, ground floor, and bedroom floors were kept intact. Responsibilities included detailed millwork drawings, material specifications, and contractor coordination.</p>
+      <div class="project-header">
+        <h2 class="project-name">Brooklyn<br>Townhouse</h2>
+        <p class="project-subtitle">Interior Renovation</p>
       </div>
       <div class="project-gallery">
         <div class="slideshow" data-slides='[{"src": "images/01_Brooklyn Townhouse/1_Brooklyn_Townhouse_Kitchen.jpg", "caption": "Floating walnut stair, microcement walls, and integrated shelving anchor the open dining level."}, {"src": "images/01_Brooklyn Townhouse/2_Brooklyn_Townhouse_Dining.jpg", "caption": "White oak cabinetry and dark stone backsplash open to the rear terrace through a full-height glazed door."}, {"src": "images/01_Brooklyn Townhouse/2_Exterior_Brooklyn_Townhouse.jpg", "caption": "Rear facade: perforated metal railings, cedar deck, and landscaped garden at the party wall."}, {"src": "images/01_Brooklyn Townhouse/3_Work_Floorplans_Brooklyn_Townhouse_edited.jpg", "caption": "Existing cellar and first floor plans with demolition scope indicated. Scale 1/4 in = 1 ft."}, {"src": "images/01_Brooklyn Townhouse/4_Shelves_Brooklyn_Townhouse.jpg", "caption": "Full-height dining shelving elevation: 12-inch deep open grid spanning 15 ft 5 in. Scale 3/8 in = 1 ft."}, {"src": "images/01_Brooklyn Townhouse/5_No_work_Floorplans_Brooklyn_Townhouse.jpg", "caption": "Proposed second floor: open living, dining, and kitchen along a 58 ft 2 in floor plate. Scale 1/4 in = 1 ft."}, {"src": "images/01_Brooklyn Townhouse/6_Kitchen_Elevation_Brooklyn_Townhouse.jpg", "caption": "Kitchen cabinet elevations: refrigerator wall, island bar, and cooking wall with hood. Scale 3/8 in = 1 ft."}]'>
@@ -490,21 +492,22 @@
         </div>
       </div>
     </div>
+      <div class="project-info">
+        <table class="project-meta">
+          <tr><td>Sector</td><td>Luxury Residential</td></tr>
+          <tr><td>Location</td><td>New York, NY</td></tr>
+          <tr><td>Year</td><td>2023</td></tr>
+          <tr><td>Team</td><td>DYO Design Office</td></tr>
+          <tr><td>Scope</td><td>Interior Renovation<br>Construction Documentation<br>Custom Fabrication</td></tr>
+        </table>
+        <p class="project-desc">Full-scope residential renovation of a private residence in New York City, encompassing design development, construction documentation, and site coordination. The scope focused on the main floor and entrance, while the garden, ground floor, and bedroom floors were kept intact. Responsibilities included detailed millwork drawings, material specifications, and contractor coordination.</p>
+      </div>
+    </div>
     <!-- 2 -->
     <div class="project-row reveal" data-project="1">
-      <div class="project-info">
-        <div class="project-info-top">
-          <h2 class="project-name">Piccola Cucina</h2>
-          <p class="project-subtitle">Food &amp; Beverage Renovation</p>
-        </div>
-        <table class="project-meta">
-          <tr><td>Sector</td><td>Hospitality</td></tr>
-          <tr><td>Location</td><td>New York, NY</td></tr>
-          <tr><td>Year</td><td>2022</td></tr>
-          <tr><td>Team</td><td>DYO Design Office</td></tr>
-          <tr><td>Scope</td><td>Interior Renovation<br>Construction Documentation<br>Space Planning</td></tr>
-        </table>
-        <p class="project-desc">Commercial interior renovation for a full-service restaurant encompassing spatial planning, finish selection, and construction documentation. The design aligned operational efficiency with a refined wood and stone material palette. Responsibilities included MEP consultant coordination and production of permit-ready drawing sets to advance agency approvals and construction execution.</p>
+      <div class="project-header">
+        <h2 class="project-name">Piccola Cucina</h2>
+        <p class="project-subtitle">Food &amp; Beverage Renovation</p>
       </div>
       <div class="project-gallery">
         <div class="slideshow" data-slides='[{"src": "images/02_Piccola Cucina/1_Render1_UES_Restaurant.jpg", "caption": "Bar render: dark marble counter, backlit bottle shelf, brass pendants, and wood baffle ceiling."}, {"src": "images/02_Piccola Cucina/2_Render3_UES_Restaurant.jpg", "caption": "Evening render: dining room and bar at night, candlelit tables against exposed wood beams and herringbone tile."}, {"src": "images/02_Piccola Cucina/3_Render4_UES_Restaurant.jpg", "caption": "Dining room toward the bar: wood baffle ceiling, vertical slat partitions, and herringbone tile in warm evening light."}, {"src": "images/02_Piccola Cucina/4_Render2_UES_Restaurant.jpg", "caption": "Dining room: olive green vertical slat walls, wood baffle ceiling, and open sightline to the bar."}, {"src": "images/02_Piccola Cucina/5_Furniture_UES_Restaurant.jpg", "caption": "Second floor furniture plan: 885 SF main area, 170 SF bar, kitchen, and back-of-house. Scale 1/4 in = 1 ft."}, {"src": "images/02_Piccola Cucina/6_RCP_UES_Restaurant.jpg", "caption": "Proposed reflected ceiling plan with lighting fixture schedule; exposed wood beam and acoustic drop ceiling zones indicated. Scale 1/4 in = 1 ft."}, {"src": "images/02_Piccola Cucina/7_Kitchen_Bar_UES_Restaurant.jpg", "caption": "Kitchen and bar layouts with equipment schedule; electrical and plumbing requirements noted. Scale 3/4 in = 1 ft."}, {"src": "images/02_Piccola Cucina/8_Details_UES_Restaurant.jpg", "caption": "Window, door, wall, and ceiling schedules with construction details. Scale 1/4 in = 1 ft."}, {"src": "images/02_Piccola Cucina/9_Plumbing_UES_Restaurant.jpg", "caption": "Plumbing riser diagram: new second floor fixtures coordinated against existing cellar and first floor conditions."}]'>
@@ -534,21 +537,22 @@
         </div>
       </div>
     </div>
-    <!-- 3 -->
-    <div class="project-row reveal" data-project="2">
       <div class="project-info">
-        <div class="project-info-top">
-          <h2 class="project-name">Bagel Market</h2>
-          <p class="project-subtitle">Food &amp; Beverage Renovation</p>
-        </div>
         <table class="project-meta">
           <tr><td>Sector</td><td>Hospitality</td></tr>
           <tr><td>Location</td><td>New York, NY</td></tr>
           <tr><td>Year</td><td>2022</td></tr>
           <tr><td>Team</td><td>DYO Design Office</td></tr>
-          <tr><td>Scope</td><td>Interior Design<br>Construction Documentation<br>Custom Fabrication</td></tr>
+          <tr><td>Scope</td><td>Interior Renovation<br>Construction Documentation<br>Space Planning</td></tr>
         </table>
-        <p class="project-desc">Commercial interior design for a local food and beverage venue pursuing a contemporary industrial character. The project featured custom poured-in-place concrete service counters with textured finishes, exposed brick walls, and black steel columns. A clear layout organized dining, bar, and service areas within an open plan, balancing efficiency and a cohesive material palette.</p>
+        <p class="project-desc">Commercial interior renovation for a full-service restaurant encompassing spatial planning, finish selection, and construction documentation. The design aligned operational efficiency with a refined wood and stone material palette. Responsibilities included MEP consultant coordination and production of permit-ready drawing sets to advance agency approvals and construction execution.</p>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="project-row reveal" data-project="2">
+      <div class="project-header">
+        <h2 class="project-name">Bagel Market</h2>
+        <p class="project-subtitle">Food &amp; Beverage Renovation</p>
       </div>
       <div class="project-gallery">
         <div class="slideshow" data-slides='[{"src": "images/03_Bagel Market/1_Render_High Bar.jpg", "caption": "Bar counter and open kitchen: cast-in-place concrete counter, exposed brick, and black wood baffle ceiling."}, {"src": "images/03_Bagel Market/2_Render_Main Area.jpg", "caption": "Main dining render: concrete service counter with display case, continuous banquette, and black wood slat ceiling."}, {"src": "images/03_Bagel Market/3_Details_Bagel_Market.jpg", "caption": "Wall, door, and formwork schedules; countertop, bench, and signage construction details. Scale 3/4 to 1 1/2 in = 1 ft."}, {"src": "images/03_Bagel Market/4_Proposed_Bagel_Market_edited.jpg", "caption": "First floor demolition plan: existing partitions, ceiling, and finishes removed; kitchen retained. Scale 3/8 in = 1 ft."}, {"src": "images/03_Bagel Market/5_RCP_Bagel_Market.jpg", "caption": "Proposed reflected ceiling plan: black wood slat ceiling with track and recessed lighting fixture schedule. Scale 3/8 in = 1 ft."}, {"src": "images/03_Bagel Market/6_MEP_Bagel_Market.jpg", "caption": "First floor mechanical plan: exhaust hood, ductwork, and equipment layout coordinated with kitchen and dining zones. Scale 3/8 in = 1 ft."}]'>
@@ -572,21 +576,22 @@
         </div>
       </div>
     </div>
+      <div class="project-info">
+        <table class="project-meta">
+          <tr><td>Sector</td><td>Hospitality</td></tr>
+          <tr><td>Location</td><td>New York, NY</td></tr>
+          <tr><td>Year</td><td>2022</td></tr>
+          <tr><td>Team</td><td>DYO Design Office</td></tr>
+          <tr><td>Scope</td><td>Interior Design<br>Construction Documentation<br>Custom Fabrication</td></tr>
+        </table>
+        <p class="project-desc">Commercial interior design for a local food and beverage venue pursuing a contemporary industrial character. The project featured custom poured-in-place concrete service counters with textured finishes, exposed brick walls, and black steel columns. A clear layout organized dining, bar, and service areas within an open plan, balancing efficiency and a cohesive material palette.</p>
+      </div>
+    </div>
     <!-- 4 -->
     <div class="project-row reveal" data-project="3">
-      <div class="project-info">
-        <div class="project-info-top">
-          <h2 class="project-name">Rouje Paris</h2>
-          <p class="project-subtitle">Flagship Retail Renovation</p>
-        </div>
-        <table class="project-meta">
-          <tr><td>Sector</td><td>Luxury Retail</td></tr>
-          <tr><td>Location</td><td>New York, NY</td></tr>
-          <tr><td>Year</td><td>2023</td></tr>
-          <tr><td>Team</td><td>DYO Design Office</td></tr>
-          <tr><td>Scope</td><td>Interior Renovation<br>Landmarks Review<br>Custom Fabrication</td></tr>
-        </table>
-        <p class="project-desc">Full interior fit-out for a French luxury fashion house in a historic SoHo cast-iron building, subject to Landmarks Preservation Commission review. Artist-commissioned fresco murals, limewash walls, antique brass metalwork, and a palette of warm whites and golden tones defined the ground floor. Role spanned design development, custom fixtures, bespoke millwork, and full construction documentation.</p>
+      <div class="project-header">
+        <h2 class="project-name">Rouje Paris</h2>
+        <p class="project-subtitle">Flagship Retail Renovation</p>
       </div>
       <div class="project-gallery">
         <div class="slideshow" data-slides='[{"src": "images/04_Rouje Paris Flagship/1_Rouje_Built_7.jpg", "caption": "Lounge seating and artist fresco mural: curved sofa, rattan chairs, and brass fixtures anchor the main sales floor."}, {"src": "images/04_Rouje Paris Flagship/2_Rouje_Built_4.jpg", "caption": "Main floor toward accessory alcoves: louvered transoms, warm-toned display niches, and open clothing rails."}, {"src": "images/04_Rouje Paris Flagship/3_Rouje_Built_6.jpg", "caption": "Front-of-house sales floor: full-height fresco mural and fluted columns frame the street-facing display area."}, {"src": "images/04_Rouje Paris Flagship/4_Rouje_Built_5.jpg", "caption": "Custom denim wall unit: grid of open cubbies in high-gloss warm off-white finish above painted wainscoting."}, {"src": "images/04_Rouje Paris Flagship/5_Rouje_Built_3.jpg", "caption": "Mid-floor display zone: white plinths, accessory console, and backlit display alcove with open sightline to rear."}, {"src": "images/04_Rouje Paris Flagship/6_Rouje_Built_2.jpg", "caption": "Restored cast-iron SoHo facade with painted columns, large storefront glazing, and new bracket signage."}, {"src": "images/04_Rouje Paris Flagship/7_Furniture_Plan_SoHo_Flagship.jpg", "caption": "Ground floor furniture plan: clothing rails, mirrors, pedestals, and millwork elements. Scale 3/8 in = 1 ft."}, {"src": "images/04_Rouje Paris Flagship/8_Demolition_SoHo_Flagship.jpg", "caption": "Ground floor demolition plan: existing partitions, glass walls, and finishes removed. Scale 1/4 in = 1 ft."}, {"src": "images/04_Rouje Paris Flagship/9_a-Section_SoHo_Flagship.jpg", "caption": "Interior elevations: fresco wall, wainscoting, hanging bars, and shelving with finishes schedule. Scale 3/8 in = 1 ft."}, {"src": "images/04_Rouje Paris Flagship/10_a-Signage_SoHo_Flagship.jpg", "caption": "Exterior signage drawings: brass bracket sign with antique brass and black steel armature detail. Scale 1 in = 1 ft."}, {"src": "images/04_Rouje Paris Flagship/11_Facade_SoHo_Flagship.jpg", "caption": "Existing and proposed storefront elevations: facade cleaned, new bracket sign and ADA doorbell added. Scale 1/2 in = 1 ft."}, {"src": "images/04_Rouje Paris Flagship/12_RCP_SoHo_Flagship.jpg", "caption": "Ground floor reflected ceiling plan: track, downlight, pendant, and sconce fixtures with lighting schedule. Scale 3/8 in = 1 ft."}, {"src": "images/04_Rouje Paris Flagship/13_Partition1_SoHo_Flagship.jpg", "caption": "FOH cash desk partition: front elevation with drawer and curtain options in high-gloss warm off-white. Scale 3/4 in = 1 ft."}, {"src": "images/04_Rouje Paris Flagship/14_Partition3_SoHo_Flagship.jpg", "caption": "FOH shelving unit: elevation and connection details, fabric-topped shelves in warm white finish. Scale 1 in = 1 ft."}, {"src": "images/04_Rouje Paris Flagship/15_Partition2_SoHo_Flagship.jpg", "caption": "Beauty console: antique brass metal shelving with drawer and curtain options in high-gloss finish. Scale 1 in = 1 ft."}]'>
@@ -628,21 +633,22 @@
         </div>
       </div>
     </div>
-    <!-- 5 -->
-    <div class="project-row reveal" data-project="4">
       <div class="project-info">
-        <div class="project-info-top">
-          <h2 class="project-name">Isabel Marant</h2>
-          <p class="project-subtitle">Boutique Retail Renovation</p>
-        </div>
         <table class="project-meta">
           <tr><td>Sector</td><td>Luxury Retail</td></tr>
-          <tr><td>Location</td><td>East Hampton, NY</td></tr>
+          <tr><td>Location</td><td>New York, NY</td></tr>
           <tr><td>Year</td><td>2023</td></tr>
           <tr><td>Team</td><td>DYO Design Office</td></tr>
-          <tr><td>Scope</td><td>Interior Renovation<br>Construction Documentation<br>Custom Fabrication</td></tr>
+          <tr><td>Scope</td><td>Interior Renovation<br>Landmarks Review<br>Custom Fabrication</td></tr>
         </table>
-        <p class="project-desc">Luxury French fashion fit-out featuring custom millwork, a palette of semi-satin white lacquer, natural oak floors, and custom display pedestals. The compact layout was carefully considered to optimize spatial flow, with a below-grade back-of-house storage space fitted with custom metal hanging shelves. Role encompassed schematic design, a full construction and fabrication document set, and contractor coordination.</p>
+        <p class="project-desc">Full interior fit-out for a French luxury fashion house in a historic SoHo cast-iron building, subject to Landmarks Preservation Commission review. Artist-commissioned fresco murals, limewash walls, antique brass metalwork, and a palette of warm whites and golden tones defined the ground floor. Role spanned design development, custom fixtures, bespoke millwork, and full construction documentation.</p>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="project-row reveal" data-project="4">
+      <div class="project-header">
+        <h2 class="project-name">Isabel Marant</h2>
+        <p class="project-subtitle">Boutique Retail Renovation</p>
       </div>
       <div class="project-gallery">
         <div class="slideshow" data-slides='[{"src": "images/05_Isabel Marant Boutique/1_EH_Boutique_Built_01.jpg", "caption": "Cedar shingle facade with painted wood storefront, display window, and matte black letter signage."}, {"src": "images/05_Isabel Marant Boutique/2_EH_Boutique_Built_07.jpg", "caption": "Main sales floor: white lacquer walls, natural oak floors, black steel clothing rails, and backlit wall shelving."}, {"src": "images/05_Isabel Marant Boutique/3_EH_Boutique_Built_05.jpg", "caption": "Accessory display wall: floating white shelves with soft-lit base, flanked by clothing rails and pink lacquer plinth."}, {"src": "images/05_Isabel Marant Boutique/4_Facade1_East_Hampton_Retail.jpg", "caption": "Storefront elevation, plan, and section: existing shingle facade retained with new matte black letter signage. Scale 3/4 in = 1 ft."}, {"src": "images/05_Isabel Marant Boutique/5_Proposed_East_Hampton_Retail.jpg", "caption": "Ground floor furniture plan. Scale 1/2 in = 1 ft."}, {"src": "images/05_Isabel Marant Boutique/6_Section1_East_Hampton_Retail.jpg", "caption": "Section AA: full-width interior section showing clothing rails, mirror, display fixtures, and shoe shelving. Scale 1/2 in = 1 ft."}, {"src": "images/05_Isabel Marant Boutique/7_Section2_East_Hampton_Retail.jpg", "caption": "Section BB: cellar and ground floor section showing back-of-house storage, lockers, and hanging shelves. Scale 1/2 in = 1 ft."}, {"src": "images/05_Isabel Marant Boutique/8_Metalwork1_East_Hampton_Retail.jpg", "caption": "Custom hanging bar: black steel pipe rail with wall support detail and fabrication shop photos. Scale 3 in = 1 ft."}, {"src": "images/05_Isabel Marant Boutique/9_Millwork2_East_Hampton_Retail.jpg", "caption": "Vitrine display table: semi-satin white lacquer with security glass top, views and connection detail. Scale 1 1/2 in = 1 ft."}]'>
@@ -672,21 +678,22 @@
         </div>
       </div>
     </div>
+      <div class="project-info">
+        <table class="project-meta">
+          <tr><td>Sector</td><td>Luxury Retail</td></tr>
+          <tr><td>Location</td><td>East Hampton, NY</td></tr>
+          <tr><td>Year</td><td>2023</td></tr>
+          <tr><td>Team</td><td>DYO Design Office</td></tr>
+          <tr><td>Scope</td><td>Interior Renovation<br>Construction Documentation<br>Custom Fabrication</td></tr>
+        </table>
+        <p class="project-desc">Luxury French fashion fit-out featuring custom millwork, a palette of semi-satin white lacquer, natural oak floors, and custom display pedestals. The compact layout was carefully considered to optimize spatial flow, with a below-grade back-of-house storage space fitted with custom metal hanging shelves. Role encompassed schematic design, a full construction and fabrication document set, and contractor coordination.</p>
+      </div>
+    </div>
     <!-- 6 -->
     <div class="project-row reveal" data-project="5">
-      <div class="project-info">
-        <div class="project-info-top">
-          <h2 class="project-name">Landmarked<br>Single Family</h2>
-          <p class="project-subtitle">Residential Extension</p>
-        </div>
-        <table class="project-meta">
-          <tr><td>Sector</td><td>Residential</td></tr>
-          <tr><td>Location</td><td>New York, NY</td></tr>
-          <tr><td>Year</td><td>2022–2023</td></tr>
-          <tr><td>Team</td><td>DYO Design Office</td></tr>
-          <tr><td>Scope</td><td>Architectural Design<br>Construction Documentation<br>Landmarks Review</td></tr>
-        </table>
-        <p class="project-desc">Rear terrace and pool addition integrated into a sloped site, requiring Special Natural Area District review and full NYC zoning compliance. The design emphasized contextual sensitivity through contextual materials and finishes. Responsibilities included site analysis, design development, zoning review, and preparation of a complete DOB filing set for the concrete pool deck, outdoor kitchen, railings, and retaining walls.</p>
+      <div class="project-header">
+        <h2 class="project-name">Landmarked<br>Single Family</h2>
+        <p class="project-subtitle">Residential Extension</p>
       </div>
       <div class="project-gallery">
         <div class="slideshow" data-slides='[{"src": "images/06_Landmarked Single Family/1_Rendering_Pool_Area.jpg", "caption": "Rear terrace render: pool, paver deck, outdoor bar counter, and metal railing against the stucco-clad rear facade."}, {"src": "images/06_Landmarked Single Family/2_Rendering_Parking_Area.jpg", "caption": "Parking area render: garage level below new concrete retaining wall and raised terrace with metal stair and railing."}, {"src": "images/06_Landmarked Single Family/3_Existing_Single_Family_Addition.jpg", "caption": "Demolition plan: existing conditions, asphalt and patio removals, with excavation volumes. Scale 1/8 in = 1 ft."}, {"src": "images/06_Landmarked Single Family/4_Proposed_Single_Family_Addition.jpg", "caption": "Proposed construction plan: new pool, terrace, retaining walls, walkway, and outdoor kitchen. Scale 1/8 in = 1 ft."}, {"src": "images/06_Landmarked Single Family/5_Elevation_Single_Family_Addition.jpg", "caption": "Existing and proposed east elevations: new deck, retaining wall, and metal railing at rear yard. Scale 3/16 in = 1 ft."}, {"src": "images/06_Landmarked Single Family/6_Section_Single_Family_Addition_edited.jpg", "caption": "Existing and proposed rear section: pool, deck, outdoor kitchen, and retaining wall at garage level. Scale 1/4 in = 1 ft."}, {"src": "images/06_Landmarked Single Family/7_Details_Single_Family_Addition.jpg", "caption": "Proposed details: metal handrail, stair plan and section, pool edge, and retaining wall with hatch door. Scale 1 1/2 in = 1 ft."}, {"src": "images/06_Landmarked Single Family/8_Zoning_Single_Family_Addition.jpg", "caption": "Zoning analysis: Special Natural Area District compliance, lot coverage, setbacks, and permitted yard obstruction diagram."}]'>
@@ -714,21 +721,22 @@
         </div>
       </div>
     </div>
+      <div class="project-info">
+        <table class="project-meta">
+          <tr><td>Sector</td><td>Residential</td></tr>
+          <tr><td>Location</td><td>New York, NY</td></tr>
+          <tr><td>Year</td><td>2022–2023</td></tr>
+          <tr><td>Team</td><td>DYO Design Office</td></tr>
+          <tr><td>Scope</td><td>Architectural Design<br>Construction Documentation<br>Landmarks Review</td></tr>
+        </table>
+        <p class="project-desc">Rear terrace and pool addition integrated into a sloped site, requiring Special Natural Area District review and full NYC zoning compliance. The design emphasized contextual sensitivity through contextual materials and finishes. Responsibilities included site analysis, design development, zoning review, and preparation of a complete DOB filing set for the concrete pool deck, outdoor kitchen, railings, and retaining walls.</p>
+      </div>
+    </div>
     <!-- 7 -->
     <div class="project-row reveal" data-project="6">
-      <div class="project-info">
-        <div class="project-info-top">
-          <h2 class="project-name">CUNY Capital Plan<br>2025–26</h2>
-          <p class="project-subtitle">Institutional Planning</p>
-        </div>
-        <table class="project-meta">
-          <tr><td>Sector</td><td>Institutional</td></tr>
-          <tr><td>Location</td><td>New York, NY</td></tr>
-          <tr><td>Year</td><td>2024–2025</td></tr>
-          <tr><td>Team</td><td>CUNY FPCM</td></tr>
-          <tr><td>Scope</td><td>Capital Project Management<br>Space Planning<br>Design Development</td></tr>
-        </table>
-        <p class="project-desc">Institutional capital planning project for the City University of New York, covering 19 campuses and over 3 million gross square feet across multiple schools. Responsibilities included space inventory analysis, capital project prioritization, and the production of planning documents for university leadership. The work informed strategic facilities decisions for the period 2025–26 to 2029–30.</p>
+      <div class="project-header">
+        <h2 class="project-name">CUNY Capital Plan<br>2025–26</h2>
+        <p class="project-subtitle">Institutional Planning</p>
       </div>
       <div class="project-gallery">
         <div class="slideshow" data-slides='[{"src": "images/07_CUNY Capital Plan/1_Cover_Capital_Book.jpg", "caption": "CUNY Five Year Capital Plan, FY2025-26 through FY2029-30."}, {"src": "images/07_CUNY Capital Plan/2_Map_2_Capital_Book.jpg", "caption": "Campus map and table of contents: 25 colleges across the five boroughs organized by senior, graduate, and community college categories."}, {"src": "images/07_CUNY Capital Plan/3_Intro1_Capital_Book.jpg", "caption": "Introduction: state of good repair analysis, condition index, needs by trade, and energy efficiency mandates."}, {"src": "images/07_CUNY Capital Plan/4_Intro2_Capital_Book.jpg", "caption": "Introduction: solar initiatives, campus sustainability programs, MWBE commitments, and the Archibus Facility Information System."}, {"src": "images/07_CUNY Capital Plan/5_Space_Type_Breakdown_Capital_Book.jpg", "caption": "University statistics: net assignable square feet by space type across all 25 campuses, with breakdowns by department, gross area, and FTE."}, {"src": "images/07_CUNY Capital Plan/6_Queens1_Capital_Book.jpg", "caption": "Queens College campus profile: site map, facility legend, space data, and institutional overview."}, {"src": "images/07_CUNY Capital Plan/7_Queens2_Capital_Book.jpg", "caption": "Queens College five-year capital project schedule: asset preservation and program growth priorities, FY2025-30. Total need: $101M."}, {"src": "images/07_CUNY Capital Plan/8_Kingsborough1_Capital_Book.jpg", "caption": "Kingsborough Community College campus profile: site map, facility legend, space data, and institutional overview."}, {"src": "images/07_CUNY Capital Plan/9_Kingsborough2_Capital_Book.jpg", "caption": "Kingsborough Community College five-year capital project schedule: asset preservation and program growth priorities, FY2025-30. Total need: $45.7M."}]'>
@@ -758,21 +766,22 @@
         </div>
       </div>
     </div>
-    <!-- 8 -->
-    <div class="project-row reveal" data-project="7">
       <div class="project-info">
-        <div class="project-info-top">
-          <h2 class="project-name">CUNY Campus<br>Utilization</h2>
-          <p class="project-subtitle">Space Planning</p>
-        </div>
         <table class="project-meta">
           <tr><td>Sector</td><td>Institutional</td></tr>
           <tr><td>Location</td><td>New York, NY</td></tr>
           <tr><td>Year</td><td>2024–2025</td></tr>
           <tr><td>Team</td><td>CUNY FPCM</td></tr>
-          <tr><td>Scope</td><td>Space Utilization<br>Occupancy Analysis<br>Capital Project Management</td></tr>
+          <tr><td>Scope</td><td>Capital Project Management<br>Space Planning<br>Design Development</td></tr>
         </table>
-        <p class="project-desc">Space utilization study analyzing occupancy patterns across 25 campuses during 2024–2025. Responsibilities included walkthrough data collection, data analysis, workspace typology classification, and base map preparation. The study yielded a system-wide occupancy rate of 31% across 27,000 seats in scope, informing campus space planning and facilities decision-making at the university level.</p>
+        <p class="project-desc">Institutional capital planning project for the City University of New York, covering 19 campuses and over 3 million gross square feet across multiple schools. Responsibilities included space inventory analysis, capital project prioritization, and the production of planning documents for university leadership. The work informed strategic facilities decisions for the period 2025–26 to 2029–30.</p>
+      </div>
+    </div>
+    <!-- 8 -->
+    <div class="project-row reveal" data-project="7">
+      <div class="project-header">
+        <h2 class="project-name">CUNY Campus<br>Utilization</h2>
+        <p class="project-subtitle">Space Planning</p>
       </div>
       <div class="project-gallery">
         <div class="slideshow" data-slides='[{"src": "images/08_CUNY Campus Utilization/1_vision_CUNY_US.jpg", "caption": "Objective and classification: occupancy rate methodology, DIY data collection approach, and campus size breakdown."}, {"src": "images/08_CUNY Campus Utilization/2_Intro_CUNY_US.jpg", "caption": "System-wide results by college degree level: occupancy rates per campus mapped across the five boroughs; university average 31% across 27,000 in-scope seats."}, {"src": "images/08_CUNY Campus Utilization/3_timeline_CUNY_US.jpg", "caption": "Study process and timeline: three-phase DIY methodology and survey sequence across all 25 campuses, January 2024 to April 2025."}, {"src": "images/08_CUNY Campus Utilization/4_ccny_CUNY_US.jpg", "caption": "City College of New York campus profile: space breakdown, office area by type, seats in scope, space stackings by building, and site map. Rate: 18%."}, {"src": "images/08_CUNY Campus Utilization/5_medgar_CUNY_US.jpg", "caption": "Medgar Evers College campus profile: space breakdown, office area by type, seats in scope, space stackings by building, and site map. Rate: 63%."}, {"src": "images/08_CUNY Campus Utilization/6_brooklyn_CUNY_US.jpg", "caption": "Brooklyn College campus profile: space breakdown, office area by type, seats in scope, space stackings by building, and site map. Rate: 20%."}]'>
@@ -796,21 +805,22 @@
         </div>
       </div>
     </div>
+      <div class="project-info">
+        <table class="project-meta">
+          <tr><td>Sector</td><td>Institutional</td></tr>
+          <tr><td>Location</td><td>New York, NY</td></tr>
+          <tr><td>Year</td><td>2024–2025</td></tr>
+          <tr><td>Team</td><td>CUNY FPCM</td></tr>
+          <tr><td>Scope</td><td>Space Utilization<br>Occupancy Analysis<br>Capital Project Management</td></tr>
+        </table>
+        <p class="project-desc">Space utilization study analyzing occupancy patterns across 25 campuses during 2024–2025. Responsibilities included walkthrough data collection, data analysis, workspace typology classification, and base map preparation. The study yielded a system-wide occupancy rate of 31% across 27,000 seats in scope, informing campus space planning and facilities decision-making at the university level.</p>
+      </div>
+    </div>
     <!-- 9 -->
     <div class="project-row reveal" data-project="8">
-      <div class="project-info">
-        <div class="project-info-top">
-          <h2 class="project-name">Personal<br>Practice</h2>
-          <p class="project-subtitle">Conceptual Design Work</p>
-        </div>
-        <table class="project-meta">
-          <tr><td>Sector</td><td>Theoretical</td></tr>
-          <tr><td>Location</td><td>New York, NY</td></tr>
-          <tr><td>Year</td><td>2016–2022</td></tr>
-          <tr><td>Team</td><td>CCNY</td></tr>
-          <tr><td>Scope</td><td>Collective Housing<br>Civic Infrastructure<br>Cultural Institutions<br>Urban Interventions</td></tr>
-        </table>
-        <p class="project-desc">Selection of projects spanning collective housing, rural civic infrastructure, cultural institutions, and urban interventions. The work investigates community, ecology, material systems, and the evolving role of public space across scales. Developed through research, contextual analysis, physical models, and digital visualization, the projects reflect a design approach grounded in experimentation and social engagement.</p>
+      <div class="project-header">
+        <h2 class="project-name">Personal<br>Practice</h2>
+        <p class="project-subtitle">Conceptual Design Work</p>
       </div>
       <div class="project-gallery">
         <div class="slideshow" data-slides='[{"src": "images/09_Personal Practice/1_Housing_a_visual 2.jpg", "caption": "Collective housing model: building section, massing render, and urban scenarios showing shared-living typology adaptable to tower, block, and flood-resilient configurations."}, {"src": "images/09_Personal Practice/2_Housing_b_technical.jpg", "caption": "Collective housing drawings: structural axonometric and floor plans showing shared and private zone distribution across ground through third floors."}, {"src": "images/09_Personal Practice/3_jefferson_b_architecture.jpg", "caption": "Jefferson&#39;s Corner sections, elevations, and physical model: food hall and farmers market organized around a restored wetland on a sloped rural site."}, {"src": "images/09_Personal Practice/4_jefferson_a_concept.jpg", "caption": "Jefferson&#39;s Corner concept: regional food access analysis, site studies, sketch explorations, site plan, and long section."}, {"src": "images/09_Personal Practice/5_library_conceptual.jpg", "caption": "Gwangju Main Library renders: red ceramic tower cluster exterior and interior views of the community reading hall with robotic Book Delivery Agents."}, {"src": "images/09_Personal Practice/6_library_architectural.jpg", "caption": "Gwangju Main Library sections and plans: robotic book stacks in red cylindrical towers connected by catwalks to a surrounding community library."}, {"src": "images/09_Personal Practice/7_urban_constellation_b_architecture.jpg", "caption": "Urban constellation: Hub section, street-level render, and three floor plans showing a mixed-use transit-oriented civic hub."}, {"src": "images/09_Personal Practice/8_urban_constellation_a_concept.jpg", "caption": "Urban constellation: exploded axonometric, program web diagram, site massing options, and typology strategies."}, {"src": "images/09_Personal Practice/9_vienna_b_architectural.jpg", "caption": "Unearthing Vienna: Michaelerplatz photo, excavation axonometric, floor plans, and cutaway section through the subterranean Roman ruins."}, {"src": "images/09_Personal Practice/10_vienna_a_concept.jpg", "caption": "Unearthing Vienna: urban figure-ground, 1991 excavation photo, layered ruin fragments, and sketch explorations of the underground intervention."}]'>
@@ -842,11 +852,21 @@
         </div>
       </div>
     </div>
-
+      <div class="project-info">
+        <table class="project-meta">
+          <tr><td>Sector</td><td>Theoretical</td></tr>
+          <tr><td>Location</td><td>New York, NY</td></tr>
+          <tr><td>Year</td><td>2016–2022</td></tr>
+          <tr><td>Team</td><td>CCNY</td></tr>
+          <tr><td>Scope</td><td>Collective Housing<br>Civic Infrastructure<br>Cultural Institutions<br>Urban Interventions</td></tr>
+        </table>
+        <p class="project-desc">Selection of projects spanning collective housing, rural civic infrastructure, cultural institutions, and urban interventions. The work investigates community, ecology, material systems, and the evolving role of public space across scales. Developed through research, contextual analysis, physical models, and digital visualization, the projects reflect a design approach grounded in experimentation and social engagement.</p>
+      </div>
+    </div>
   </div><!-- /project-list -->
 
   <!-- FOOTER -->
-      <footer>
+  <footer>
     <div class="footer-left">
       <p class="footer-tagline">Get in <strong>touch!</strong></p>
       <p class="footer-sub">I am currently open to opportunities in architecture and design firms in New York and Medellín. Feel free to reach out.</p>
@@ -1005,5 +1025,6 @@
 
   }); // end DOMContentLoaded
   </script>
+
 </body>
 </html>
