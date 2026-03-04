@@ -473,9 +473,9 @@
       <p class="footer-sub">I am currently open to opportunities in architecture and design firms in New York and Medellín. Feel free to reach out.</p>
     </div>
     <div class="footer-right">
-      <a href="/cdn-cgi/l/email-protection#a9c3dcc8c7c0dac8d3c8879fe9cec4c8c0c587cac6c4" class="footer-contact-item">
+      <a href="mailto:juanisaza.6@gmail.com" class="footer-contact-item">
         <span class="fc-label">Email</span>
-        <span class="fc-value"><span class="__cf_email__" data-cfemail="90fae5f1fef9e3f1eaf1bea6d0f7fdf1f9fcbef3fffd">[email&#160;protected]</span></span>
+        <span class="fc-value">juanisaza.6@gmail.com</span>
         <span class="fc-arrow">↗</span>
       </a>
       <div class="footer-loc">
@@ -494,7 +494,7 @@
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
       const cursor = document.getElementById('cursor');
       const ring   = document.getElementById('cursorRing');
@@ -522,4 +522,14 @@
         entries.forEach(function (e) {
           if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
-      }, { threshold: 0.08, rootMargin: 
+      }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(function (el, i) {
+        el.style.transitionDelay = (i % 2) * 0.07 + 's';
+        obs.observe(el);
+      });
+
+    }); // end DOMContentLoaded
+  </script>
+</body>
+</html>
