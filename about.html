@@ -69,7 +69,12 @@
     }
     nav.scrolled { border-color: var(--mid); background: rgba(250,247,247,.95); backdrop-filter: blur(14px); }
     .nav-logo { display: inline-flex; align-items: center; text-decoration: none; }
-    .nav-logo img { height: 22px; width: auto; display: block; }
+    .nav-logo-text {
+      font-family: var(--display);
+      font-size: 13px; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink);
+    }
+    .nav-logo-text strong { font-weight: 600; }
     .nav-links { display: flex; gap: 40px; list-style: none; }
     .nav-links a {
       font-family: var(--body);
@@ -136,28 +141,28 @@
       margin-bottom: 40px;
     }
     .exp-entry {
-      margin-bottom: 36px; padding-bottom: 36px;
+      margin-bottom: 28px; padding-bottom: 28px;
       border-bottom: 1px solid var(--off);
     }
     .exp-entry:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-    .exp-header {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      gap: 12px; margin-bottom: 5px;
-    }
+    /* Role = same weight as edu-degree */
     .exp-role {
       font-family: var(--display);
-      font-size: 17px; font-weight: 400; letter-spacing: 0.01em; line-height: 1.25;
+      font-size: 16px; font-weight: 400; letter-spacing: 0.01em;
+      margin-bottom: 4px; line-height: 1.25;
     }
+    /* Dates = same as edu-dates */
     .exp-dates {
       font-family: var(--body);
-      font-size: 10px; letter-spacing: 0.06em; color: var(--stone);
-      white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+      font-size: 10px; color: var(--stone); letter-spacing: 0.06em;
+      margin-bottom: 4px;
     }
+    /* Org = same as edu-school */
     .exp-org {
       font-family: var(--body);
-      font-size: 13px; color: var(--stone); line-height: 1.6; margin-bottom: 10px;
+      font-size: 12px; color: var(--stone); line-height: 1.55; margin-bottom: 10px;
     }
-    .exp-org strong { color: var(--ink); font-weight: 400; font-size: 14px; }
+    .exp-org strong { color: var(--stone); font-weight: 400; }
     .exp-desc {
       font-family: var(--body);
       font-size: 12px; color: var(--stone); line-height: 1.8;
@@ -316,8 +321,8 @@
   <div class="cursor-ring" id="cursorRing"></div>
 
   <nav id="nav">
-    <a href="index-A-light.html" class="nav-logo">
-      <img src="Juan_Isaza_Logo.png" alt="Juan Isaza Architect" />
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">Juan <strong>Isaza</strong></span>
     </a>
     <ul class="nav-links">
       <li><a href="projects.html">Projects</a></li>
@@ -346,47 +351,42 @@
       <p class="col-label reveal">Professional Experience</p>
 
       <div class="exp-entry reveal">
-        <div class="exp-header">
-          <span class="exp-role">Associate Planner</span>
-          <span class="exp-dates">Jun 2024 – Oct 2025</span>
-        </div>
-        <p class="exp-org"><strong>City University of New York</strong><br>Facilities Planning, Construction, and Management<br>New York, NY</p>
+        <p class="exp-role">Associate Planner</p>
+        <p class="exp-dates">Jun 2024 – Oct 2025</p>
+
+        <p class="exp-org">City University of New York<br>Facilities Planning, Construction, and Management<br>New York, NY</p>
         <p class="exp-desc">Led space utilization studies across multiple campuses. Collaborated with institutional leaders, architecture firms, and internal teams to advance campus master planning. Contributed to one completed Campus Master Plan and supported two additional ongoing plans.</p>
       </div>
 
       <div class="exp-entry reveal">
-        <div class="exp-header">
-          <span class="exp-role">Planning Intern</span>
-          <span class="exp-dates">Oct 2023 – May 2024</span>
-        </div>
-        <p class="exp-org"><strong>City University of New York</strong><br>Facilities Planning, Construction, and Management<br>New York, NY</p>
+        <p class="exp-role">Planning Intern</p>
+        <p class="exp-dates">Oct 2023 – May 2024</p>
+
+        <p class="exp-org">City University of New York<br>Facilities Planning, Construction, and Management<br>New York, NY</p>
         <p class="exp-desc">Developed a standardized methodology for utilization studies across diverse campus typologies. Collected and analyzed space data and prepared presentations for stakeholder meetings.</p>
       </div>
 
       <div class="exp-entry reveal">
-        <div class="exp-header">
-          <span class="exp-role">Project Architect</span>
-          <span class="exp-dates">Sep 2022 – May 2023</span>
-        </div>
-        <p class="exp-org"><strong>DYO Design Office</strong><br>New York, NY</p>
+        <p class="exp-role">Project Architect</p>
+        <p class="exp-dates">Sep 2022 – May 2023</p>
+
+        <p class="exp-org">DYO Design Office<br>New York, NY</p>
         <p class="exp-desc">Led full project execution for residential renovations, restaurants, and a luxury clothing store. Managed technical drawings, built-in furniture design, budgeting, scheduling, and contractor coordination. Maintained Revit models to unified firm standards.</p>
       </div>
 
       <div class="exp-entry reveal">
-        <div class="exp-header">
-          <span class="exp-role">Architecture Intern</span>
-          <span class="exp-dates">Feb 2021 – Aug 2022</span>
-        </div>
-        <p class="exp-org"><strong>Eduardo Jackson Architect</strong><br>Medellín, Colombia</p>
+        <p class="exp-role">Architecture Intern</p>
+        <p class="exp-dates">Feb 2021 – Aug 2022</p>
+
+        <p class="exp-org">Eduardo Jackson Architect<br>Medellín, Colombia</p>
         <p class="exp-desc">Supported residential and small-scale commercial renovation projects. Produced technical drawings, designed built-in furniture, and supervised contractors.</p>
       </div>
 
       <div class="exp-entry reveal">
-        <div class="exp-header">
-          <span class="exp-role">Competition Designer</span>
-          <span class="exp-dates">Jan 2020</span>
-        </div>
-        <p class="exp-org"><strong>Henry Marc Design Studio</strong><br>New York, NY</p>
+        <p class="exp-role">Competition Designer</p>
+        <p class="exp-dates">Jan 2020</p>
+
+        <p class="exp-org">Henry Marc Design Studio<br>New York, NY</p>
         <p class="exp-desc">Designed and documented a library competition entry for a South Korean government agency. Delivered design schematics and technical drawings within competition requirements.</p>
       </div>
     </div>
@@ -473,9 +473,9 @@
       <p class="footer-sub">I am currently open to opportunities in architecture and design firms in New York and Medellín. Feel free to reach out.</p>
     </div>
     <div class="footer-right">
-      <a href="mailto:juanisaza.6@gmail.com" class="footer-contact-item">
+      <a href="/cdn-cgi/l/email-protection#8ce6f9ede2e5ffedf6eda2baccebe1ede5e0a2efe3e1" class="footer-contact-item">
         <span class="fc-label">Email</span>
-        <span class="fc-value">juanisaza.6@gmail.com</span>
+        <span class="fc-value"><span class="__cf_email__" data-cfemail="107a65717e7963716a713e2650777d71797c3e737f7d">[email&#160;protected]</span></span>
         <span class="fc-arrow">↗</span>
       </a>
       <a href="tel:+573113737757" class="footer-contact-item">
@@ -524,11 +524,13 @@
           if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
       }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
       document.querySelectorAll('.reveal').forEach(function (el, i) {
         el.style.transitionDelay = (i % 2) * 0.07 + 's';
         obs.observe(el);
       });
-    });
+
+    }); // end DOMContentLoaded
   </script>
 </body>
 </html>
