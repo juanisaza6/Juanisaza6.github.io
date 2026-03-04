@@ -450,7 +450,7 @@
 
       .discipline { padding: 32px 24px; }
 
-      footer { grid-template-columns: 1fr; gap: 24px; padding: 48px 24px; }
+      footer { gap: 24px; padding: 48px 24px; }
       .footer-left, .footer-tagline, .footer-sub { text-align: left; }
     }
 
@@ -621,7 +621,7 @@
     </div>
   </section>
 
-      <footer>
+        <footer>
     <div class="footer-left">
       <p class="footer-tagline">Get in <strong>touch!</strong></p>
       <p class="footer-sub">I am currently open to opportunities in architecture and design firms in New York and Medellín. Feel free to reach out.</p>
@@ -716,19 +716,18 @@
       });
 
       // ─── Scroll reveal
-      const obs = new IntersectionObserver(function (entries) {
+            const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            obs.unobserve(e.target);
-          }
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-      document.querySelectorAll('.reveal').forEach(function (el) {
+
+      document.querySelectorAll('.reveal').forEach(function (el, i) {
+        el.style.transitionDelay = (i % 3) * 0.07 + 's';
         obs.observe(el);
       });
-    });
-  </script>
 
+    }); // end DOMContentLoaded
+  </script>
 </body>
 </html>
