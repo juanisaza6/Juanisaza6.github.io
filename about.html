@@ -266,25 +266,20 @@
       transition: color .2s;
     }
     .footer-contact-item:hover { color: var(--ink); }
-    .footer-contact-item:hover
     .fc-label {
       font-family: var(--body);
-      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--stone); width: 60px; flex-shrink: 0;
+      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--stone); width: 72px; flex-shrink: 0;
     }
-        .fc-value { position: relative; padding-bottom: 1px; }
-    .fc-value::after {
-      content: ''; position: absolute;
-      bottom: 0; left: 0; width: 0; height: 1px;
-      background: var(--ink); transition: width .3s var(--ease);
+    .fc-value {
+      border-bottom: 1px solid var(--mid); padding-bottom: 1px;
+      transition: border-color .2s;
     }
-    .footer-contact-item:hover .fc-value::after { width: 100%; }
+    .footer-contact-item:hover .fc-value { border-color: var(--ink); }
     .footer-loc {
       font-family: var(--body); font-size: 13px; color: var(--stone);
       display: flex; align-items: center; gap: 14px;
     }
-
-
     /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity:0; transform:translateY(16px); }
@@ -297,17 +292,10 @@
     @media (max-width: 768px) {
       nav { padding: 0 24px; }
       .nav-links { gap: 20px; }
-
-      /* Stack page header to single column */
-      .page-header { grid-template-columns: 1fr; }
-      .page-header-left { padding: 48px 24px 32px; border-right: none; border-bottom: 1px solid var(--mid); }
-      .page-header-right { padding: 32px 24px 48px; }
-
-      /* Stack about body to single column */
+      .page-header { grid-template-columns: 1fr; padding: calc(var(--nav-h) + 36px) 24px 40px; text-align: left; }
       .about-body { grid-template-columns: 1fr; }
       .exp-col { padding: 40px 24px; border-right: none; border-bottom: 1px solid var(--mid); }
       .skills-col { padding: 40px 24px; }
-
       footer { grid-template-columns: 1fr; gap: 24px; padding: 48px 24px; }
       .footer-left, .footer-tagline, .footer-sub { text-align: left; }
     }
@@ -315,6 +303,7 @@
       nav { padding: 0 16px; }
       .nav-links { gap: 12px; }
       .nav-links a { font-size: 10px; }
+      .page-header { padding: calc(var(--nav-h) + 24px) 16px 32px; }
       .page-title { font-size: 28px; }
       .page-intro-text { font-size: 12px; }
       .exp-col { padding: 28px 16px; }
@@ -322,11 +311,6 @@
       .exp-role { font-size: 12px; }
       .exp-dates { font-size: 9px; }
       .edu-degree { font-size: 12px; }
-    }
-
-    @media (max-width: 768px) {
-      .cursor, .cursor-ring { display: none !important; }
-      body { cursor: auto; }
     }
   </style>
 </head>
@@ -531,7 +515,7 @@
         nav.classList.toggle('scrolled', window.scrollY > 40);
       });
 
-                  const obs = new IntersectionObserver(function (entries) {
+      const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
