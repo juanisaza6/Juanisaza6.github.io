@@ -267,7 +267,6 @@
       transition: background .25s; position: relative; overflow: hidden;
     }
     .work-card:hover { background: var(--warm); }
-    .work-card:hover .wc-arrow { opacity:1; transform:translate(0,0); }
     .work-card:hover .wc-line { width:100%; }
     .wc-num {
       font-family: var(--body);
@@ -302,12 +301,6 @@
     .wc-loc {
       font-family: var(--body);
       font-size: 11px; color: var(--stone); margin-top: 6px;
-    }
-    .wc-arrow {
-      position:absolute; bottom:22px; right:22px;
-      font-size:16px; color:var(--ink);
-      opacity:0; transform:translate(-5px,5px);
-      transition: opacity .25s, transform .3s var(--ease);
     }
 
     /* ABOUT STRIP */
@@ -483,11 +476,6 @@
 
       footer { padding: 40px 16px; }
     }
-
-    @media (max-width: 768px) {
-      .cursor, .cursor-ring { display: none !important; }
-      body { cursor: auto; }
-    }
   </style>
 </head>
 <body>
@@ -565,32 +553,26 @@
       <a href="projects.html" class="work-card reveal">
         <div class="wc-thumb"><img src="images/01_Brooklyn Townhouse/1_Brooklyn_Townhouse_Kitchen.jpg" alt="Brooklyn Townhouse" loading="lazy" /></div>
         <div><p class="wc-type">Luxury Residential</p><h3 class="wc-name">Brooklyn Townhouse</h3><p class="wc-loc">New York, NY — Interior Renovation</p></div>
-        <span class="wc-arrow">↗</span>
       </a>
       <a href="projects.html" class="work-card reveal">
         <div class="wc-thumb"><img src="images/02_Piccola Cucina/1_Render1_UES_Restaurant.jpg" alt="Piccola Cucina" loading="lazy" /></div>
         <div><p class="wc-type">Hospitality</p><h3 class="wc-name">Piccola Cucina</h3><p class="wc-loc">New York, NY — Food &amp; Beverage Renovation</p></div>
-        <span class="wc-arrow">↗</span>
       </a>
       <a href="projects.html" class="work-card reveal">
         <div class="wc-thumb"><img src="images/03_Bagel Market/1_Render_High Bar.jpg" alt="Bagel Market" loading="lazy" /></div>
         <div><p class="wc-type">Hospitality</p><h3 class="wc-name">Bagel Market</h3><p class="wc-loc">New York, NY — Food &amp; Beverage Renovation</p></div>
-        <span class="wc-arrow">↗</span>
       </a>
       <a href="projects.html" class="work-card reveal">
         <div class="wc-thumb"><img src="images/04_Rouje Paris Flagship/1_Rouje_Built_7.jpg" alt="Rouje Paris" loading="lazy" /></div>
         <div><p class="wc-type">Luxury Retail</p><h3 class="wc-name">Rouje Paris</h3><p class="wc-loc">New York, NY — Flagship Retail Renovation</p></div>
-        <span class="wc-arrow">↗</span>
       </a>
       <a href="projects.html" class="work-card reveal">
         <div class="wc-thumb"><img src="images/05_Isabel Marant Boutique/2_EH_Boutique_Built_07.jpg" alt="Isabel Marant" loading="lazy" /></div>
         <div><p class="wc-type">Luxury Retail</p><h3 class="wc-name">Isabel Marant</h3><p class="wc-loc">East Hampton, NY — Boutique Retail Renovation</p></div>
-        <span class="wc-arrow">↗</span>
       </a>
       <a href="projects.html" class="work-card reveal">
         <div class="wc-thumb"><img src="images/09_Personal Practice/9_vienna_b_architectural.jpg" alt="Personal Practice" loading="lazy" /></div>
         <div><p class="wc-type">Theoretical</p><h3 class="wc-name">Personal Practice</h3><p class="wc-loc">New York, NY — Conceptual Design Work</p></div>
-        <span class="wc-arrow">↗</span>
       </a>
     </div>
   </section>
@@ -720,15 +702,17 @@
       });
 
       // ─── Scroll reveal
-                  const obs = new IntersectionObserver(function (entries) {
+            const obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
       document.querySelectorAll('.reveal').forEach(function (el, i) {
         el.style.transitionDelay = (i % 3) * 0.07 + 's';
         obs.observe(el);
       });
+
     }); // end DOMContentLoaded
   </script>
 </body>
