@@ -382,19 +382,13 @@
       font-family: var(--body); font-size: 13px; transition: color .2s;
     }
     .footer-contact-item:hover { color: var(--ink); }
-    .footer-contact-item:hover
     .fc-label {
       font-family: var(--body);
-      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--stone); width: 60px; flex-shrink: 0;
+      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--stone); width: 72px; flex-shrink: 0;
     }
-        .fc-value { position: relative; padding-bottom: 1px; }
-    .fc-value::after {
-      content: ''; position: absolute;
-      bottom: 0; left: 0; width: 0; height: 1px;
-      background: var(--ink); transition: width .3s var(--ease);
-    }
-    .footer-contact-item:hover .fc-value::after { width: 100%; }
+    .fc-value { border-bottom: 1px solid var(--mid); padding-bottom: 1px; transition: border-color .2s; }
+    .footer-contact-item:hover .fc-value { border-color: var(--ink); }
     .footer-loc { font-family: var(--body); font-size: 13px; color: var(--stone); display: flex; align-items: center; gap: 14px; }
 
     /* ── ANIMATIONS ── */
@@ -915,7 +909,7 @@
   </div><!-- /project-list -->
 
   <!-- FOOTER -->
-    <footer>
+      <footer>
     <div class="footer-left">
       <p class="footer-tagline">Get in <strong>touch!</strong></p>
       <p class="footer-sub">I am currently open to opportunities in architecture and design firms in New York and Medellín. Feel free to reach out.</p>
@@ -940,32 +934,40 @@
     </div>
   </footer>
 
-
   <script>
   document.addEventListener('DOMContentLoaded', function () {
 
+    // ── CURSOR ──────────────────────────────────────────────────
     const cursor = document.getElementById('cursor');
     const ring   = document.getElementById('cursorRing');
     if (cursor && ring) {
       let mx = window.innerWidth/2, my = window.innerHeight/2, rx = mx, ry = my;
-      document.addEventListener('mousemove', function (e) {
+      document.addEventListener('mousemove', function(e) {
         mx = e.clientX; my = e.clientY;
-        cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+        cursor.style.left = mx+'px'; cursor.style.top = my+'px';
         cursor.style.opacity = '1'; ring.style.opacity = '1';
       });
-      (function tick() {
-        rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-        requestAnimationFrame(tick);
-      })();
+      (function tick(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+        ring.style.left=rx+'px'; ring.style.top=ry+'px';
+        requestAnimationFrame(tick); })();
     }
 
+    // ── NAV SCROLL ──────────────────────────────────────────────
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', function () {
+    window.addEventListener('scroll', function() {
       nav.classList.toggle('scrolled', window.scrollY > 40);
     });
 
-    document.querySelectorAll('.project-row').forEach(function (row) {
+    // ── SCROLL REVEAL ───────────────────────────────────────────
+    const obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+
+    // ── SLIDESHOWS ──────────────────────────────────────────────
+    document.querySelectorAll('.project-row').forEach(function(row) {
       var ss      = row.querySelector('.slideshow');
       var slides  = ss.querySelectorAll('.slide');
       var thumbs  = row.querySelectorAll('.thumb');
@@ -974,8 +976,10 @@
       var next    = ss.querySelector('.slide-arrow.next');
       var total   = slides.length;
       var current = 0;
+
+      // Parse caption data from data-slides attribute
       var slideData = [];
-      try { slideData = JSON.parse(ss.dataset.slides.replace(/&#39;/g, "'") || '[]'); } catch(e) {}
+      try { slideData = JSON.parse(ss.dataset.slides || '[]'); } catch(e) {}
 
       function goTo(n) {
         slides[current].classList.remove('active');
@@ -983,18 +987,30 @@
         current = (n + total) % total;
         slides[current].classList.add('active');
         thumbs[current] && thumbs[current].classList.add('active');
-        if (counter) counter.textContent = (current + 1) + ' / ' + total;
-        if (thumbs[current]) thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        // scroll thumb into view
+        if (thumbs[current]) {
+          thumbs[current].scrollIntoView({ behavior:'smooth', block:'nearest', inline:'nearest' });
+        }
       }
 
-      prev && prev.addEventListener('click', function (e) { e.stopPropagation(); goTo(current - 1); });
-      next && next.addEventListener('click', function (e) { e.stopPropagation(); goTo(current + 1); });
-      thumbs.forEach(function (th, i) { th.addEventListener('click', function () { goTo(i); }); });
-      slides.forEach(function (slide, i) {
-        slide.addEventListener('click', function () { openLightbox(slideData, i); });
+      prev && prev.addEventListener('click', function(e) { e.stopPropagation(); goTo(current-1); });
+      next && next.addEventListener('click', function(e) { e.stopPropagation(); goTo(current+1); });
+
+      thumbs.forEach(function(th, i) {
+        th.addEventListener('click', function() { goTo(i); });
+      });
+
+      // Click slide to open lightbox
+      slides.forEach(function(slide, i) {
+        slide.addEventListener('click', function() {
+          var data = slideData[i] || {};
+          openLightbox(slideData, i);
+        });
       });
     });
 
+    // ── LIGHTBOX ────────────────────────────────────────────────
     var lb        = document.getElementById('lightbox');
     var lbImg     = document.getElementById('lbImg');
     var lbCaption = document.getElementById('lbCaption');
@@ -1006,17 +1022,24 @@
     var lbIndex   = 0;
 
     function openLightbox(data, index) {
-      lbData = data; lbIndex = index;
+      lbData  = data;
+      lbIndex = index;
       showLbSlide(lbIndex);
       lb.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
+
     function closeLightbox() {
       lb.classList.remove('open');
       document.body.style.overflow = '';
     }
+
     function showLbSlide(i) {
       var d = lbData[i] || {};
+      // Remove any old placeholder
+      var ph = lb.querySelector('.lb-placeholder');
+      if (ph) ph.remove();
+      // Show image
       lbImg.src = d.src || '';
       lbImg.style.display = 'block';
       lbCaption.textContent = d.caption || '';
@@ -1026,11 +1049,17 @@
 
     lbClose.addEventListener('click', closeLightbox);
     lbBackdrop.addEventListener('click', closeLightbox);
-    lbPrev.addEventListener('click', function () { lbIndex = (lbIndex - 1 + lbData.length) % lbData.length; showLbSlide(lbIndex); });
-    lbNext.addEventListener('click', function () { lbIndex = (lbIndex + 1) % lbData.length; showLbSlide(lbIndex); });
-    document.addEventListener('keydown', function (e) {
+    lbPrev.addEventListener('click', function() {
+      lbIndex = (lbIndex - 1 + lbData.length) % lbData.length;
+      showLbSlide(lbIndex);
+    });
+    lbNext.addEventListener('click', function() {
+      lbIndex = (lbIndex + 1) % lbData.length;
+      showLbSlide(lbIndex);
+    });
+    document.addEventListener('keydown', function(e) {
       if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape')     closeLightbox();
+      if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft')  { lbIndex = (lbIndex - 1 + lbData.length) % lbData.length; showLbSlide(lbIndex); }
       if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbData.length; showLbSlide(lbIndex); }
     });
